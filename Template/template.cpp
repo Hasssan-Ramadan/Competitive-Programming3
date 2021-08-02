@@ -16,6 +16,7 @@ using pi = pair<int, int>;
 
 #define LSOne(S) (S & (-S))
 
+#define EPS 1e-9
 
 void setIO(string name = "")
 {
