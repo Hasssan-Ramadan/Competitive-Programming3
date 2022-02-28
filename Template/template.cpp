@@ -2,6 +2,7 @@
 using namespace std;
 
 using ll = long long;
+using ull = unsigned long long;
 
 using vi = vector<int>;
 #define pb push_back
