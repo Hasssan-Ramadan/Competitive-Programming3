@@ -19,6 +19,8 @@ using pi = pair<int, int>;
 
 #define EPS 1e-9
 
+#define endl '\n'
+
 void setIO(string name = "")
 {
  ios_base::sync_with_stdio(0);
