@@ -169,3 +169,16 @@ ll lcm(ll a, ll b)
 {
   return a / gcd(a, b) * b;
 }
+
+// Modular Exponentiation
+unsigned mod_pow(unsigned num, unsigned pow, unsigned mod)
+{
+  unsigned long long res;
+  for (res = 1; pow; pow >>= 1)
+  {
+    if (pow & 1)
+      res = ((res % mod) * (num % mod)) % mod;
+    num = ((num % mod) * (num % mod)) % mod;
+  }
+  return res;
+}
