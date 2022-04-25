@@ -62,3 +62,12 @@ bool isInsideRectangle(double x, double y, double x1, double y1, double x2, doub
 {
  return x >= x1 && x <= x2 && y >= y1 && y <= y2;
 }
+
+// check if triangle is right angled
+bool isRightAngled(int x1, int y1, int x2, int y2, int x3, int y3)
+{
+ ll A = (ll)pow((x2 - x1), 2) + (ll)pow((y2 - y1), 2);
+ ll B = (ll)pow((x3 - x2), 2) + (ll)pow((y3 - y2), 2);
+ ll C = (ll)pow((x3 - x1), 2) + (ll)pow((y3 - y1), 2);
+ return ((A > 0 and B > 0 and C > 0) and (A == (B + C) or B == (A + C) or C == (A + B)));
+}
