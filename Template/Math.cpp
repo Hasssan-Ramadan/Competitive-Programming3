@@ -171,9 +171,9 @@ ll lcm(ll a, ll b)
 }
 
 // Modular Exponentiation
-unsigned mod_pow(unsigned num, unsigned pow, unsigned mod)
+ull mod_pow(ull num, ull pow, ull mod)
 {
-  unsigned long long res;
+  ull res;
   for (res = 1; pow; pow >>= 1)
   {
     if (pow & 1)
