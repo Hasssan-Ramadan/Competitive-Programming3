@@ -5,17 +5,17 @@ using ll = long long;
 using ull = unsigned long long;
 
 using vi = vector<int>;
-#define pb push_back
-#define rsz resize
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
 
 using pi = pair<int, int>;
-#define f first
-#define s second
-#define mp make_pair
 
-#define LSOne(S) (S & (-S))
+#define LSOneValue(S) (S & (-S))
+#define OnesCount(S) (__builtin_popcountll(S))
+
+// 1-indexed
+#define LSB(S) (__builtin_ffsll(S))
+#define MSB(S) (64LL - __builtin_clzll(S))
 
 #define EPS 1e-9
 #define PI 3.14159265358979323846
