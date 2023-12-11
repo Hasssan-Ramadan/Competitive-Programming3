@@ -53,46 +53,76 @@ public:
 class SegmentTree
 {
 private:
-  vi st, A;
-  int n;
-  int left(int p) { return p << 1; }
-  int right(int p) { return (p << 1) + 1; }
-  void build(int p, int L, int R)
+  vector<ll> st, A;
+  ll n;
+
+  ll left(ll p) { return p << 1; }
+
+  ll right(ll p) { return (p << 1) + 1; }
+
+  void build(ll p, ll L, ll R)
   {
     if (L == R)
-      st[p] = L;
+    {
+      st[p] = A[L];
+    }
     else
     {
       build(left(p), L, (L + R) / 2);
       build(right(p), (L + R) / 2 + 1, R);
-      int p1 = st[left(p)], p2 = st[right(p)];
-      st[p] = (A[p1] <= A[p2]) ? p1 : p2;
+      st[p] = min(st[left(p)], st[right(p)]);
     }
   }
-  int rmq(int p, int L, int R, int i, int j)
+
+  void update(ll p, ll L, ll R, ll pos, ll val)
+  {
+    if (L == R)
+    {
+      st[p] = val;
+    }
+    else
+    {
+      ll mid = L + (R - L) / 2;
+      if (pos <= mid)
+      {
+        update(left(p), L, mid, pos, val);
+      }
+      else
+      {
+        update(right(p), mid + 1, R, pos, val);
+      }
+
+      st[p] = min(st[left(p)], st[right(p)]);
+    }
+  }
+
+  ll query(ll p, ll L, ll R, ll i, ll j)
   {
     if (i > R || j < L)
-      return -1;
+    {
+      return 1e9;
+    }
+
     if (L >= i && R <= j)
+    {
       return st[p];
-    int p1 = rmq(left(p), L, (L + R) / 2, i, j);
-    int p2 = rmq(right(p), (L + R) / 2 + 1, R, i, j);
-    if (p1 == -1)
-      return p2;
-    if (p2 == -1)
-      return p1;
-    return (A[p1] <= A[p2]) ? p1 : p2;
+    }
+
+    return min(query(left(p), L, (L + R) / 2, i, j), query(right(p), (L + R) / 2 + 1, R, i, j));
   }
 
 public:
-  SegmentTree(const vi &_A)
+  SegmentTree(const vector<ll> &_A)
   {
     A = _A;
-    n = (int)A.size();
+    n = (ll)A.size();
     st.assign(4 * n, 0);
     build(1, 0, n - 1);
   }
-  int rmq(int i, int j) { return rmq(1, 0, n - 1, i, j); }
+
+  void update(ll pos, ll val) { update(1, 0, n - 1, pos, val); }
+
+  ll query(ll i, ll j) { return query(1, 0, n - 1, i, j); }
 };
 
 class FenwickTree
